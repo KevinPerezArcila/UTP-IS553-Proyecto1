@@ -15,18 +15,18 @@ import java.util.Scanner;
 public class Agendas {
     
     Scanner dato = new Scanner(System.in);
-    File archivo = new File("Agenda.txt");
+    File archivo = new File("agenda.txt");
     private Contactos[] contacto; 
     
     public Agendas(int tamaño){
         this.contacto = new Contactos[tamaño];
     } //1
     
-    public void archivoExiste() throws IOException{
+    public void archivoExiste() {
         
         try {
             if(archivo.exists()){
-                
+                System.out.println("");
             }
             else{
                 archivo.createNewFile();
@@ -39,7 +39,7 @@ public class Agendas {
     
     public boolean validarTelefono(String telefono, boolean verificar){
         try {
-            BufferedReader leer = new BufferedReader(new FileReader("Agenda.txt"));
+            BufferedReader leer = new BufferedReader(new FileReader("agenda.txt"));
             String x="";
             verificar = false;
             while((x=leer.readLine()) != null){
@@ -287,7 +287,7 @@ public class Agendas {
     public void leerArchivo() throws FileNotFoundException{ //14
         try{
             BufferedWriter escribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo, true)));
-            BufferedReader leer = new BufferedReader(new FileReader("Agenta.txt"));
+            BufferedReader leer = new BufferedReader(new FileReader("agenda.txt"));
             String x="";
             while((x=leer.readLine()) != null ){
                 String[] Contacto = x.split(";");
@@ -316,7 +316,7 @@ public class Agendas {
     public void añadirAlArchivo(Contactos nuevo){ //15
         try{
             BufferedWriter escribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo,true)));
-            BufferedReader leer = new BufferedReader(new FileReader("Agenda.txt"));
+            BufferedReader leer = new BufferedReader(new FileReader("agenda.txt"));
             if(nuevo != null){
                 if(validarTelefono(nuevo.getTelefonos(), false)){
                     

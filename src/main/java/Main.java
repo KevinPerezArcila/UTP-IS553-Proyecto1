@@ -1,12 +1,13 @@
 
 import Agenda.Agendas;
 import Contacto.Contactos;
+import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
            
         String nombre;
         String telefono;
@@ -18,9 +19,9 @@ public class Main {
         Integer opcion;
         Scanner dato = new Scanner(System.in);
         
-        //Agenda agendaTelefonica = new Agenda(100);
-        //agendaTelefonica.leerTexto();
-        //agendaTelefonica.existearchivo();
+        Agendas agendaTelefonica = new Agendas(100);
+        agendaTelefonica.leerArchivo();
+        agendaTelefonica.archivoExiste();
         Contactos informacion;
         
         
@@ -65,6 +66,7 @@ public class Main {
                 alias = dato.nextLine();
                 
                 informacion = new Contactos(nombre, telefono, correo, dirrecion, alias);
+                agendaTelefonica.agregarContactoNuevo(informacion);
                
                 
                 
@@ -73,35 +75,56 @@ public class Main {
                 break;
                 
             case 2:
-                
+                System.out.println("Ingrese el nombre del contacto que quiere eliminar: ");
+                nombre = dato.nextLine();
+                informacion = new Contactos(nombre, "","","","");
+                agendaTelefonica.eliminarContacto(informacion);
                 break;
 
             case 3:
+                System.out.println("Ingrese el nombre que quiere buscar: ");
+                nombre = dato.nextLine();
+                agendaTelefonica.buscarPorNombre(nombre);
                 
                 break;
                 
             case 4:
-                
+                System.out.println("Escriba el telefono que quiere buscar: ");
+                telefono = dato.nextLine();
+                agendaTelefonica.buscarPorTelefono(telefono);
                 break;
                 
             case 5: 
+                System.out.println("Escriba el correo que quiere buscar: ");
+                correo = dato.nextLine();
+                agendaTelefonica.buscarPorCorreo(correo);
                
                 break;
                 
             case 6:
+                System.out.println("Escriba la direccion que quiere buscar: ");
+                dirrecion = dato.nextLine();
+                agendaTelefonica.buscarPorDireccion(dirrecion);
  
                 break;
 
             case 7:
+                System.out.println("Escriba el alias que quiere buscar: ");
+                alias = dato.nextLine();
+                agendaTelefonica.buscarPorAlias(alias);
                 
                 break;
                 
             case 8:
+                System.out.println("Escriba el nombre a editar: ");
+                nombre = dato.nextLine();
+                informacion = new Contactos(nombre, "","","","");
+                agendaTelefonica.editarContacto(informacion);
                 
                 break;
                 
             case 9:
-                
+                agendaTelefonica.importar();
                 break;
                 
             default:

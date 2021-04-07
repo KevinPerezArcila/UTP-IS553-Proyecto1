@@ -26,7 +26,7 @@ public class Contactos {
         
         //VALIDACION DE DATOS REPETIDOS
         public boolean equals(Contactos op){
-            if (this.telefonos.equals(op.telefonos))
+            if (this.telefonos.equals(op.getTelefonos()))
             {
                 return true;
             }
@@ -76,10 +76,7 @@ public class Contactos {
         this.alias = alias;
     }
 
-    @Override
-    public String toString() {
-        return "nombre=" + nombre + ", telefonos=" + telefonos + ", correo=" + correo + ", direccion=" + direccion + ", alias=" + alias;
-    }
+    
     
     
 }
