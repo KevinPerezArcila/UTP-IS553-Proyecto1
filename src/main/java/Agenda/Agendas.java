@@ -175,6 +175,8 @@ public class Agendas {
             if(contacto[i] != null && contacto[i].equals(nuevo)) {
                 contacto[i]=null;
                 System.out.println("El contacto a sido eliminado. ");
+                eliminarArchivo();
+                llenarArchivo(nuevo);
                 verificar=true;
             }
         }

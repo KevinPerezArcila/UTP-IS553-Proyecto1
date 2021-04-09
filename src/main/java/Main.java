@@ -18,7 +18,7 @@ public class Main {
         
         Integer opcion;
         Scanner dato = new Scanner(System.in);
-        
+        Scanner datoAuxiliar = new Scanner(System.in);
         Agendas agendaTelefonica = new Agendas(100);
         agendaTelefonica.leerArchivo();
         agendaTelefonica.archivoExiste();
@@ -50,12 +50,15 @@ public class Main {
                     nombre = dato.nextLine(); 
                 }
                 
+              
+               
+                  
                 telefono = dato.nextLine();
                 while(telefono.equals("")){
                     System.out.println("Ingrese el telefono (Obligatorio) ");
                     telefono = dato.nextLine(); 
+                 
                 }
-                
                 System.out.println("Ingrese el correo electronico (Opcional) ");
                 correo = dato.nextLine();
                 
@@ -75,49 +78,50 @@ public class Main {
                 break;
                 
             case 2:
-                System.out.println("Ingrese el nombre del contacto que quiere eliminar: ");
-                nombre = dato.nextLine();
-                informacion = new Contactos(nombre, "","","","");
+                System.out.println("Ingrese el numero de telefo del contacto que quiere eliminar: ");
+                telefono = datoAuxiliar.nextLine();
+                informacion = new Contactos("",telefono,"","","");
                 agendaTelefonica.eliminarContacto(informacion);
                 break;
 
             case 3:
+                
                 System.out.println("Ingrese el nombre que quiere buscar: ");
-                nombre = dato.nextLine();
+                nombre = datoAuxiliar.nextLine();
                 agendaTelefonica.buscarPorNombre(nombre);
                 
                 break;
                 
             case 4:
                 System.out.println("Escriba el telefono que quiere buscar: ");
-                telefono = dato.nextLine();
+                telefono = datoAuxiliar.nextLine();
                 agendaTelefonica.buscarPorTelefono(telefono);
                 break;
                 
             case 5: 
                 System.out.println("Escriba el correo que quiere buscar: ");
-                correo = dato.nextLine();
+                correo = datoAuxiliar.nextLine();
                 agendaTelefonica.buscarPorCorreo(correo);
                
                 break;
                 
             case 6:
                 System.out.println("Escriba la direccion que quiere buscar: ");
-                dirrecion = dato.nextLine();
+                dirrecion = datoAuxiliar.nextLine();
                 agendaTelefonica.buscarPorDireccion(dirrecion);
  
                 break;
 
             case 7:
                 System.out.println("Escriba el alias que quiere buscar: ");
-                alias = dato.nextLine();
+                alias = datoAuxiliar.nextLine();
                 agendaTelefonica.buscarPorAlias(alias);
                 
                 break;
                 
             case 8:
                 System.out.println("Escriba el nombre a editar: ");
-                nombre = dato.nextLine();
+                nombre = datoAuxiliar.nextLine();
                 informacion = new Contactos(nombre, "","","","");
                 agendaTelefonica.editarContacto(informacion);
                 
