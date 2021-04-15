@@ -43,8 +43,9 @@ public class Main {
         switch(opcion){
  
             case 1: 
-                
+               
                 nombre = dato.nextLine();
+                
                 while(nombre.equals("")){
                     System.out.println("Ingrese el nombre (Obligatorio) ");
                     nombre = dato.nextLine(); 
@@ -78,7 +79,7 @@ public class Main {
                 break;
                 
             case 2:
-                System.out.println("Ingrese el numero de telefo del contacto que quiere eliminar: ");
+                System.out.println("Ingrese el numero de telefono del contacto que quiere eliminar: ");
                 telefono = datoAuxiliar.nextLine();
                 informacion = new Contactos("",telefono,"","","");
                 agendaTelefonica.eliminarContacto(informacion);
@@ -120,9 +121,9 @@ public class Main {
                 break;
                 
             case 8:
-                System.out.println("Escriba el nombre a editar: ");
-                nombre = datoAuxiliar.nextLine();
-                informacion = new Contactos(nombre, "","","","");
+                System.out.println("Escriba el numero de telefono del contacto a editar: ");
+                telefono = datoAuxiliar.nextLine();
+                informacion = new Contactos("", telefono ,"","","");
                 agendaTelefonica.editarContacto(informacion);
                 
                 break;

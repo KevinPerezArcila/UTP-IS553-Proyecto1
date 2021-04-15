@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class Agendas {
     
     Scanner dato = new Scanner(System.in);
+     Scanner dato2 = new Scanner(System.in);
     File archivo = new File("agenda.txt");
     private Contactos[] contacto; 
     
@@ -240,6 +241,8 @@ public class Agendas {
         }
     } //12
     
+    
+    
     public void editarContacto(Contactos nuevo){
         boolean verificar = false;
         String auxiliarNombre;
@@ -248,19 +251,30 @@ public class Agendas {
         String auxiliarDireccion;
         String auxiliarAlias;
         
+        
+       
+   
+        
         for(int i= 0; i<contacto.length; i++){
-            if(contacto[i] != null && contacto[i].getNombre().equals(nuevo.getNombre())){
+            
+            if(contacto[i] != null && contacto[i].getTelefonos().equals(nuevo.getTelefonos())){
               
                 auxiliarNombre = dato.nextLine();
                 while(auxiliarNombre.equals("")){
                     System.out.println("Ingrese el nombre (Obligatorio) ");
                     auxiliarNombre = dato.nextLine();
                   }  
+              
+               
+                    
+                
                 auxiliarTelefonos = dato.nextLine();
                 while(auxiliarTelefonos.equals("")){
                     System.out.println("Ingrese el telefono (Obligatorio) ");
                     auxiliarTelefonos = dato.nextLine();
                     }
+               
+                
                 System.out.println("Ingrese el correo electronico (Opcional) ");
                 auxiliarCorreo = dato.nextLine();
                 
@@ -270,13 +284,22 @@ public class Agendas {
                 System.out.println("Ingrese el alias (Opcional) ");
                 auxiliarAlias = dato.nextLine();
                 
+                 
+                
+            
+                
+                   
+                 
+                
                 eliminarAux(nuevo);
                 
                 nuevo = new Contactos (auxiliarNombre, auxiliarTelefonos, auxiliarCorreo, auxiliarDireccion, auxiliarAlias);
+                
                 añadirEditado(nuevo);
                 eliminarArchivo();
                 llenarArchivo(nuevo);
                 break;
+                
             }
         }
         verificar=true;
@@ -377,11 +400,11 @@ public class Agendas {
             }
 
         }
-    } //16
+    } 
     
     public void importar(){
         
-        String archivo2 = "ArchivoImportado.txt";
+        String archivo2 = "importararchivo.txt";
 
         try {
 
@@ -390,9 +413,9 @@ public class Agendas {
             String x = "";
             while ((x = leer.readLine()) != null) {
 
-                String[] Contacto = x.split(";");
-                Contactos op = new Contactos(Contacto[0], Contacto[1], Contacto[2], Contacto[3], Contacto[4]);
-                if (validarTelefono(Contacto[1], false) == false) {
+                String[] contactoNuevo = x.split(";");
+                Contactos op = new Contactos(contactoNuevo[0], contactoNuevo[1], contactoNuevo[2], contactoNuevo[3], contactoNuevo[4]);
+                if (validarTelefono(contactoNuevo[1], false) == false) {
                     añadirContactoAux(op);
                     añadirAlArchivo(op);
                     System.out.println("Los contactos fueron importados. ");
@@ -406,7 +429,7 @@ public class Agendas {
             System.out.println(op2.getMessage());
         }
 
-    } //19
+    } 
   
   
     
