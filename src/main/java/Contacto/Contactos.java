@@ -9,15 +9,17 @@ public class Contactos {
     private String correo;
     private String direccion;
     private String alias;
+    private String dondeLoConoce;
     
     //CONSTRUCTOR
 
-    public Contactos(String nombre, String telefonos, String correo, String direccion, String alias) {
+    public Contactos(String nombre, String telefonos, String correo, String direccion, String alias, String dondeLoConoce) {
         this.nombre = nombre;
         this.telefonos = telefonos;
         this.correo = correo;
         this.direccion = direccion;
         this.alias = alias;
+        this.dondeLoConoce = dondeLoConoce;
     }
     
         public Contactos() {
@@ -74,6 +76,14 @@ public class Contactos {
 
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public String getDondeLoConoce() {
+        return dondeLoConoce;
+    }
+
+    public void setDondeLoConoce(String dondeLoConoce) {
+        this.dondeLoConoce = dondeLoConoce;
     }
 
     

@@ -94,6 +94,7 @@ public class Agendas {
                 System.out.println("Su correo es: " + contacto[i].getCorreo());
                 System.out.println("Su direccion es: " + contacto[i].getDireccion());
                 System.out.println("Su alias es: " + contacto[i].getAlias());
+                System.out.println("Lo conocio en: " + contacto[i].getDondeLoConoce());
             }
         }
         verificar=true;
@@ -101,6 +102,26 @@ public class Agendas {
             System.out.println("El contacto no esta en la agenda. ");
         }
     } //5
+    
+    public void eliminarUnContacto(Contactos eliminar){
+        boolean verificar = false;
+        for(int i = 0; i<contacto.length && !verificar; i++){
+            if(contacto[i] != null && contacto[i].equals(eliminar)) {
+                contacto[i]=null;
+                System.out.println("El contacto a sido eliminado. ");
+                eliminarArchivo();
+                llenarArchivo(eliminar);
+                verificar=true;
+            }
+        }
+        
+        if(!verificar){
+            System.out.println("No se encontro contacto a eliminar. ");
+        }
+        
+        
+    } 
+    
     
     public void buscarPorTelefono(String telefono){
         boolean verificar = false;
@@ -111,6 +132,7 @@ public class Agendas {
                 System.out.println("Su correo es: " + contacto[i].getCorreo());
                 System.out.println("Su direccion es: " + contacto[i].getDireccion());
                 System.out.println("Su alias es: " + contacto[i].getAlias());
+                 System.out.println("Lo conocio en: " + contacto[i].getDondeLoConoce());
             }
         }
         verificar=true;
@@ -128,6 +150,7 @@ public class Agendas {
                 System.out.println("Su correo es: " + contacto[i].getCorreo());
                 System.out.println("Su direccion es: " + contacto[i].getDireccion());
                 System.out.println("Su alias es: " + contacto[i].getAlias());
+                 System.out.println("Lo conocio en: " + contacto[i].getDondeLoConoce());
             }
         }
         verificar=true;
@@ -145,6 +168,7 @@ public class Agendas {
                 System.out.println("Su correo es: " + contacto[i].getCorreo());
                 System.out.println("Su direccion es: " + contacto[i].getDireccion());
                 System.out.println("Su alias es: " + contacto[i].getAlias());
+                 System.out.println("Lo conocio en: " + contacto[i].getDondeLoConoce());
             }
         }
         verificar=true;
@@ -152,6 +176,23 @@ public class Agendas {
             System.out.println("El contacto no esta en la agenda. ");
         }
     } //8
+    public void buscarPorCiudad(String ciudad){
+        boolean verificar = false;
+        for(int i = 0; i<contacto.length; i++){
+            if(contacto[i] != null && contacto[i].getDondeLoConoce().equals(ciudad)){
+                System.out.println("Su nombre es: " + contacto[i].getNombre());
+                System.out.println("Su telefono es: " + contacto[i].getTelefonos());
+                System.out.println("Su correo es: " + contacto[i].getCorreo());
+                System.out.println("Su direccion es: " + contacto[i].getDireccion());
+                System.out.println("Su alias es: " + contacto[i].getAlias());
+                 System.out.println("Lo conocio en: " + contacto[i].getDondeLoConoce());
+            }
+        }
+        verificar=true;
+        if(!verificar){
+            System.out.println("El contacto no esta en la agenda. ");
+        }
+    } 
     
     public void buscarPorAlias(String alias){
         boolean verificar = false;
@@ -162,6 +203,7 @@ public class Agendas {
                 System.out.println("Su correo es: " + contacto[i].getCorreo());
                 System.out.println("Su direccion es: " + contacto[i].getDireccion());
                 System.out.println("Su alias es: " + contacto[i].getAlias());
+                 System.out.println("Lo conocio en: " + contacto[i].getDondeLoConoce());
             }
         }
         verificar = true;
@@ -250,6 +292,7 @@ public class Agendas {
         String auxiliarCorreo;
         String auxiliarDireccion;
         String auxiliarAlias;
+        String auxiliarDondeLoConoce;
         
         
        
@@ -259,17 +302,18 @@ public class Agendas {
             
             if(contacto[i] != null && contacto[i].getTelefonos().equals(nuevo.getTelefonos())){
               
+                System.out.println("Ingrese el nombre (Obligatorio) ");
                 auxiliarNombre = dato.nextLine();
-                while(auxiliarNombre.equals("")){
+                while(auxiliarNombre.isBlank()){
                     System.out.println("Ingrese el nombre (Obligatorio) ");
                     auxiliarNombre = dato.nextLine();
                   }  
               
                
                     
-                
+                System.out.println("Ingrese el telefono (Obligatorio) ");
                 auxiliarTelefonos = dato.nextLine();
-                while(auxiliarTelefonos.equals("")){
+                while(auxiliarTelefonos.isBlank()){
                     System.out.println("Ingrese el telefono (Obligatorio) ");
                     auxiliarTelefonos = dato.nextLine();
                     }
@@ -284,6 +328,13 @@ public class Agendas {
                 System.out.println("Ingrese el alias (Opcional) ");
                 auxiliarAlias = dato.nextLine();
                 
+                System.out.println("en donde conocio esta persona (Obligatorio) ");
+                auxiliarDondeLoConoce = dato.nextLine();
+                while(auxiliarDondeLoConoce.isBlank()){
+                    System.out.println("en donde conocio esta persona (Obligatorio) ");
+                    auxiliarDondeLoConoce = dato.nextLine();
+                }
+                
                  
                 
             
@@ -293,7 +344,7 @@ public class Agendas {
                 
                 eliminarAux(nuevo);
                 
-                nuevo = new Contactos (auxiliarNombre, auxiliarTelefonos, auxiliarCorreo, auxiliarDireccion, auxiliarAlias);
+                nuevo = new Contactos (auxiliarNombre, auxiliarTelefonos, auxiliarCorreo, auxiliarDireccion, auxiliarAlias,auxiliarDondeLoConoce);
                 
                 añadirEditado(nuevo);
                 eliminarArchivo();
@@ -316,7 +367,7 @@ public class Agendas {
             String x="";
             while((x=leer.readLine()) != null ){
                 String[] Contacto = x.split(";");
-                Contactos op = new Contactos(Contacto[0],Contacto[1],Contacto[2],Contacto[3],Contacto[4]);
+                Contactos op = new Contactos(Contacto[0],Contacto[1],Contacto[2],Contacto[3],Contacto[4],Contacto[5]);
                 añadirContactoAux(op);
                 
             }
@@ -347,7 +398,7 @@ public class Agendas {
                     
                 }
                 else{
-                    escribir.write(nuevo.getNombre()+";"+nuevo.getTelefonos()+";"+nuevo.getCorreo()+";"+nuevo.getDireccion()+";"+nuevo.getAlias());
+                    escribir.write(nuevo.getNombre()+";"+nuevo.getTelefonos()+";"+nuevo.getCorreo()+";"+nuevo.getDireccion()+";"+nuevo.getAlias()+";"+nuevo.getDondeLoConoce());
                     escribir.write("\n");
                 }
             }
@@ -373,12 +424,7 @@ public class Agendas {
         boolean verificar = false;
         boolean auxiliar = true;
 
-        for (int i = 0; i < contacto.length && !verificar; i++) {
-            if (contacto[i] != null && contacto[i].getNombre().equals(nuevo.getNombre())) {
-
-                auxiliar = false;
-            }
-        }
+       
 
         for (int i = 0; i < contacto.length && !verificar; i++) {
             if (contacto[i] != null && contacto[i].getTelefonos().equals(nuevo.getTelefonos())) {
@@ -405,6 +451,10 @@ public class Agendas {
     public void importar(){
         
         String archivo2 = "importararchivo.txt";
+        
+        
+        
+       
 
         try {
 
@@ -412,21 +462,41 @@ public class Agendas {
 
             String x = "";
             while ((x = leer.readLine()) != null) {
-
+                String telefonos = "";
                 String[] contactoNuevo = x.split(";");
-                Contactos op = new Contactos(contactoNuevo[0], contactoNuevo[1], contactoNuevo[2], contactoNuevo[3], contactoNuevo[4]);
-                if (validarTelefono(contactoNuevo[1], false) == false) {
-                    añadirContactoAux(op);
-                    añadirAlArchivo(op);
-                    System.out.println("Los contactos fueron importados. ");
+               
+                for(int i=1; i<(contactoNuevo.length-4); i++ ){
+                    
+                    if(i<contactoNuevo.length-5){
+                        telefonos += contactoNuevo[i]+";" ; 
+                    }
+                    else{
+                        telefonos += contactoNuevo[i] ; 
+                    }
+                }
+                for(int i=0; i<contactoNuevo.length; i++){
+                    System.out.println("dato "+i+ " "+ contactoNuevo[i]);
+                }
+                Contactos op = new Contactos(contactoNuevo[0], telefonos ,contactoNuevo[contactoNuevo.length-4] , contactoNuevo[contactoNuevo.length-3], contactoNuevo[contactoNuevo.length-2], contactoNuevo[contactoNuevo.length-1]);
+                if (validarTelefono(telefonos, false) == false) {
+                    if (contactoNuevo[0].equals("") || contactoNuevo[contactoNuevo.length-1].equals("") ) {
+                        System.out.println("Falta uno o mas campos obligatorios. ");
+                    }
+                    else{
+                        añadirContactoAux(op);
+                        añadirAlArchivo(op);
+                        System.out.println("Los contactos fueron importados. ");
+                    }
+                    
                 } else {
-                    System.out.println("El contacto no se importo, numero de telefono repetido");
+                   System.out.println("El contacto no se importo, numero de telefono repetido"); 
                 }
 
             }
             System.out.println("");
         } catch (Exception op2) {
-            System.out.println(op2.getMessage());
+     
+            System.out.println("Faltan datos obligatorios. ");
         }
 
     } 
